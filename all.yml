@@ -1,0 +1,10 @@
+---
+- name: Localhost
+  hosts: all
+  become: true
+  gather_facts: true
+  roles:
+    - docker
+    - hyperland
+    - libvirt
+    - vagrant
