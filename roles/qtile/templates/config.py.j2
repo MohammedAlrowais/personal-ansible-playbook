@@ -1,0 +1,61 @@
+from libqtile import hook, layout, bar, widget
+from libqtile.config import Key, Group, Screen
+from libqtile.lazy import lazy
+
+mod = "mod4"  # Super key
+keys = [
+    Key([mod], "Return", lazy.spawn("xterm")),
+    Key([mod], "q", lazy.window.kill()),
+    Key([mod], "r", lazy.spawncmd()),
+    Key([mod], "j", lazy.layout.down()),
+    Key([mod], "k", lazy.layout.up()),
+    Key([mod], "h", lazy.layout.left()),
+    Key([mod], "l", lazy.layout.right()),
+
+    # Window
+    Key([mod, "shift"], "f",
+        lazy.window.toggle_fullscreen(),
+        desc="Toggle fullscreen",
+    ),
+
+    # Applications
+    Key([mod], "b", lazy.spawn("firefox")),
+    Key([mod], "c", lazy.spawn("code")),
+
+    # Resize
+    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window left"),
+    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window right"),
+    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
+    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+
+    Key([mod, "shift"], "h", lazy.layout.shrink(), desc="Shrink window"),
+    Key([mod, "shift"], "l", lazy.layout.grow(), desc="Grow window"),
+]
+
+groups = [Group(i) for i in "123456789"]
+
+for i in groups:
+    keys.extend([
+        Key([mod], i.name, lazy.group[i.name].toscreen()),
+        Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+    ])
+
+layouts = [
+    layout.MonadTall(),
+    layout.Stack(num_stacks=2),
+    layout.Tile(),
+]
+
+screens = [
+    Screen(top=bar.Bar([
+        widget.GroupBox(),
+        widget.Prompt(),
+        widget.WindowName(),
+        widget.Clock(format="%Y-%m-%d %H:%M"),
+    ], 24)),
+]
+
+@hook.subscribe.startup_once
+def autostart():
+    # Restore Nitrogen wallpaper on startup
+    os.system("nitrogen --restore &")

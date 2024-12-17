@@ -1,0 +1,42 @@
+---
+- name: Qtile - Install necessary packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - xserver-xorg
+    - xinit
+    - libpangocairo-1.0-0
+    - python3-pip
+    - python3-xcffib
+    - python3-cairocffi
+
+- name: Qtile - Ensure pipx is installed
+  apt:
+    name: pipx
+    state: present
+    update_cache: true
+
+- name: Qtile - Install qtile
+  community.general.pipx:
+    name: qtile
+    state: present
+
+- name: Qtile - Ensure configuration directory exists
+  file:
+    path: "{{ qtile_config_directory }}"
+    state: directory
+    mode: '0755'
+
+- name: Qtile - Copy qtile configuration file
+  template:
+    src: config.py.j2
+    dest: "{{ qtile_config_directory }}/config.py"
+    mode: '0644'
+
+- name: Kill the Qtile process
+  command: pkill -x qtile
+
+- name: Start Qtile again
+  command: startx

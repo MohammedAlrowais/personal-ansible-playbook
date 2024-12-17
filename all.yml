@@ -4,7 +4,8 @@
   become: true
   gather_facts: true
   roles:
-    - docker
-    - hyperland
-    - libvirt
-    - vagrant
+    # - docker
+    - nitrogen
+    - qtile
+    # - libvirt
+    # - vagrant

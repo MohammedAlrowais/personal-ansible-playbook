@@ -1,0 +1,5 @@
+---
+- name: Nitrogen - install
+  apt:
+    name: nitrogen
+    state: present
