@@ -4,7 +4,7 @@ from libqtile.lazy import lazy
 
 mod = "mod4"  # Super key
 keys = [
-    Key([mod], "Return", lazy.spawn("xterm")),
+    Key([mod], "Return", lazy.spawn("kitty")),
     Key([mod], "q", lazy.window.kill()),
     Key([mod], "r", lazy.spawncmd()),
     Key([mod], "j", lazy.layout.down()),
