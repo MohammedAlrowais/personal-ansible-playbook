@@ -3,6 +3,8 @@ user: alialsada
 group: alialsada
 
 essential_packages:
+  - xfce4-settings-manager
+  - thunar
   - qbittorrent
   - firefox-esr
   - ansible
@@ -45,7 +47,6 @@ essential_packages:
   - sudo
   - surf
   - screenkey
-  - thunar
   - tortoisehg
   - virtualenvwrapper
   - vlc

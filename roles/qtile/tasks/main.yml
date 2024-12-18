@@ -34,9 +34,3 @@
     src: config.py.j2
     dest: "{{ qtile_config_directory }}/config.py"
     mode: '0644'
-
-- name: Kill the Qtile process
-  command: pkill -x qtile
-
-- name: Start Qtile again
-  command: startx

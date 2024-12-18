@@ -17,20 +17,25 @@ keys = [
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen",
     ),
+    Key([mod, "shift"], "Return", lazy.layout.swap_main(), desc="Swap with master"),
+
 
     # Applications
     Key([mod], "b", lazy.spawn("firefox")),
     Key([mod], "c", lazy.spawn("code")),
+    Key([mod], "f", lazy.spawn("thunar")),
 
     # Resize
-    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window right"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+    Key([mod, "control"], "h", lazy.layout.shrink(), desc="Shrink window"),
+    Key([mod, "control"], "l", lazy.layout.grow(), desc="Grow window"),
 
-    Key([mod, "shift"], "h", lazy.layout.shrink(), desc="Shrink window"),
-    Key([mod, "shift"], "l", lazy.layout.grow(), desc="Grow window"),
+    # Shuffle
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window left"),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window right"),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
 ]
+
 
 groups = [Group(i) for i in "123456789"]
 
@@ -58,4 +63,4 @@ screens = [
 @hook.subscribe.startup_once
 def autostart():
     # Restore Nitrogen wallpaper on startup
-    os.system("nitrogen --restore &")
+    os.system("/usr/bin/nitrogen --restore &")
