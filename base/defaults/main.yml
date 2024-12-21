@@ -5,6 +5,8 @@ group: alialsada
 essential_packages:
   - xfce4-settings-manager
   - thunar
+  - xclip 
+  - network-manager
   - qbittorrent
   - firefox-esr
   - ansible
@@ -50,7 +52,6 @@ essential_packages:
   - tortoisehg
   - virtualenvwrapper
   - vlc
-  - xclip
   - xmobar
   - xmonad
   - zsh
