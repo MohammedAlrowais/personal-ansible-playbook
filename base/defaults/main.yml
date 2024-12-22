@@ -7,77 +7,77 @@ essential_packages:
   - thunar
   - xclip 
   - network-manager
-  - qbittorrent
-  - firefox-esr
-  - ansible
-  - aptitude
-  - arandr
-  - build-essential
-  - compton
-  - exa
-  - fonts-font-awesome
-  - fonts-noto
-  - fonts-noto-color-emoji
-  - ibus-table-emoji
-  - geany
-  - gimp
-  - git
-  - htop
-  - imagemagick
-  - kdenlive
-  - keepass2
-  - libghc-xmonad-contrib-dev
-  - libghc-xmonad-dev
-  - libxrandr-dev
-  - lightdm
-  - maven
-  - mediainfo
-  - menu
-  - mercurial
-  - net-tools
-  - nitrogen
-  - node-less
-  - obs-studio
   - pavucontrol
   - pulseaudio
-  - rofi
-  - rsync
-  - ruby-sass
-  - simplescreenrecorder
-  - snapd
-  - suckless-tools
-  - sudo
-  - surf
-  - screenkey
-  - tortoisehg
-  - virtualenvwrapper
-  - vlc
-  - xmobar
-  - xmonad
-  - zsh
-  - libreoffice
-  - libx265-dev
-  - qemu-system
-  - libvirt-clients
-  - libvirt-daemon-system
-  - virt-manager
-  - vagrant-libvirt
-  - ansible-lint
-  - inkscape
-  - audacity
-  - python3-pip
-  - nvidia-driver
-  - nvidia-driver-libs:i386
-  - firmware-misc-nonfree
-  - mesa-vulkan-drivers
-  - mesa-vulkan-drivers:i386
-  - libgl1:i386
-  - libgl1-mesa-glx:i386
-  - libgl1-mesa-dri:i386
-  - libglx-mesa0:i386
-  - steam
-  - ffmpegthumbnailer
-  - tumbler
+  - ansible
+  # - qbittorrent
+  # - firefox-esr
+  # - aptitude
+  # - arandr
+  # - build-essential
+  # - compton
+  # - exa
+  # - fonts-font-awesome
+  # - fonts-noto
+  # - fonts-noto-color-emoji
+  # - ibus-table-emoji
+  # - geany
+  # - gimp
+  # - git
+  # - htop
+  # - imagemagick
+  # - kdenlive
+  # - keepass2
+  # - libghc-xmonad-contrib-dev
+  # - libghc-xmonad-dev
+  # - libxrandr-dev
+  # - lightdm
+  # - maven
+  # - mediainfo
+  # - menu
+  # - mercurial
+  # - net-tools
+  # - nitrogen
+  # - node-less
+  # - obs-studio
+  # - rofi
+  # - rsync
+  # - ruby-sass
+  # - simplescreenrecorder
+  # - snapd
+  # - suckless-tools
+  # - sudo
+  # - surf
+  # - screenkey
+  # - tortoisehg
+  # - virtualenvwrapper
+  # - vlc
+  # - xmobar
+  # - xmonad
+  # - zsh
+  # - libreoffice
+  # - libx265-dev
+  # - qemu-system
+  # - libvirt-clients
+  # - libvirt-daemon-system
+  # - virt-manager
+  # - vagrant-libvirt
+  # - ansible-lint
+  # - inkscape
+  # - audacity
+  # - python3-pip
+  # - nvidia-driver
+  # - nvidia-driver-libs:i386
+  # - firmware-misc-nonfree
+  # - mesa-vulkan-drivers
+  # - mesa-vulkan-drivers:i386
+  # - libgl1:i386
+  # - libgl1-mesa-glx:i386
+  # - libgl1-mesa-dri:i386
+  # - libglx-mesa0:i386
+  # - steam
+  # - ffmpegthumbnailer
+  # - tumbler
 
 # Compton
 compton_opacity_apps:

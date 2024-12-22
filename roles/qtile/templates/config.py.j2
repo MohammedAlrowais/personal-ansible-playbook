@@ -5,13 +5,22 @@ from libqtile.lazy import lazy
 mod = "mod4"  # Super key
 keys = [
     Key([mod], "space", lazy.next_layout()),  # Cycle through layouts
-    Key([mod], "Return", lazy.spawn("kitty")),
     Key([mod], "q", lazy.window.kill()),
     Key([mod], "r", lazy.spawncmd()),
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "k", lazy.layout.up()),
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
+
+    # Sounds
+    ## Volume up
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")),
+    ## Volume down
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")),
+    ## Mute/unmute
+    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
+    ## Open Pavucontrol for detailed control
+    Key([mod], "p", lazy.spawn("pavucontrol")),
 
     # Window
     Key([mod, "shift"], "f",
@@ -22,6 +31,7 @@ keys = [
 
 
     # Applications
+    Key([mod], "Return", lazy.spawn("kitty")),
     Key([mod], "b", lazy.spawn("firefox")),
     Key([mod], "c", lazy.spawn("code")),
     Key([mod], "f", lazy.spawn("thunar")),
@@ -29,6 +39,8 @@ keys = [
     # Resize
     Key([mod, "control"], "h", lazy.layout.shrink(), desc="Shrink window"),
     Key([mod, "control"], "l", lazy.layout.grow(), desc="Grow window"),
+    Key([mod], "n", lazy.window.toggle_minimize()),
+    Key([mod, "shift"], "n", lazy.group.unminimize_all()),
 
     # Shuffle
     Key([mod, "shift"], "l", lazy.layout.shuffle_left(), desc="Move window left"),
@@ -47,13 +59,13 @@ for i in groups:
     ])
 
 layouts = [
+    layout.Columns(num_columns=3),
     layout.MonadTall(),
-    layout.Stack(num_stacks=2),
-    layout.Tile(),
 ]
 
 screens = [
     Screen(top=bar.Bar([
+        widget.CurrentLayout(),  # Displays the current layout name
         widget.GroupBox(),
         widget.Prompt(),
         widget.WindowName(),
