@@ -1,0 +1,17 @@
+- name: Polybar - Install
+  apt:
+    name: polybar
+    state: present
+    update_cache: true
+
+- name: Polybar - Ensure configuration directory exists
+  file:
+    path: "{{ polybar_config_directory }}"
+    state: directory
+    mode: '0755'
+
+- name: Polybar - Copy polybar configuration file
+  template:
+    src: config.j2
+    dest: "{{ polybar_config_directory }}/config.ini"
+    mode: '0644'

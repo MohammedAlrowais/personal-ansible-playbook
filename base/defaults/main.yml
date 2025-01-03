@@ -9,7 +9,15 @@ essential_packages:
   - network-manager
   - pavucontrol
   - pulseaudio
+  - pamixer #sound
   - ansible
+  - dmenu
+  - rofi # apps manager
+  - ncdu # Disk space
+  - Polybar
+  - imagemagick #--------------
+  - ibnotify-bin
+  - blueman
   # - qbittorrent
   # - firefox-esr
   # - aptitude
@@ -25,7 +33,6 @@ essential_packages:
   # - gimp
   # - git
   # - htop
-  # - imagemagick
   # - kdenlive
   # - keepass2
   # - libghc-xmonad-contrib-dev

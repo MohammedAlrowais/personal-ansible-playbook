@@ -23,10 +23,22 @@
     name: qtile
     state: present
 
+- name: Install required Python packages for Qtile
+  ansible.builtin.command:
+    cmd: pipx runpip qtile install qtile_extras psutil dbus-next
+  register: qtile_install_results
+  changed_when: False
+
 - name: Qtile - Ensure configuration directory exists
   file:
     path: "{{ qtile_config_directory }}"
     state: directory
+    mode: '0755'
+
+- name: Qtile - Copy qtile autostart script
+  template:
+    src: autostart.sh.j2
+    dest: "{{ qtile_config_directory }}/autostart.sh"
     mode: '0755'
 
 - name: Qtile - Copy qtile configuration file
