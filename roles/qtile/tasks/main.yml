@@ -34,12 +34,15 @@
     path: "{{ qtile_config_directory }}"
     state: directory
     mode: '0755'
-
-- name: Qtile - Copy qtile autostart script
+    
+- name: Qtile - Copy qtile scripts
   template:
-    src: autostart.sh.j2
+    src: "{{ item }}"
     dest: "{{ qtile_config_directory }}/autostart.sh"
     mode: '0755'
+  loop:
+    - wallpaper.sh.j2
+    - autostart.sh.j2
 
 - name: Qtile - Copy qtile configuration file
   template:
