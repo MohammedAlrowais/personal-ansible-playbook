@@ -1,7 +1,7 @@
 ---
 - name: Localhost
   hosts: all
-  # become: true
+  become: true
   gather_facts: true
   roles:
     # - docker

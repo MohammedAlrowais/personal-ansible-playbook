@@ -23,6 +23,11 @@
     name: qtile
     state: present
 
+- name: Qtile - add qtile to path
+  command:
+    cmd: pipx ensurepath
+  changed_when: false
+
 - name: Install required Python packages for Qtile
   ansible.builtin.command:
     cmd: pipx runpip qtile install qtile_extras psutil dbus-next
@@ -35,14 +40,20 @@
     state: directory
     mode: '0755'
     
-- name: Qtile - Copy qtile scripts
+# - name: Qtile - Copy qtile scripts
+#   template:
+#     src: "{{ item }}"
+#     dest: "{{ qtile_config_directory }}/autostart.sh"
+#     mode: '0755'
+#   loop:
+#     # - wallpaper.sh.j2
+#     - autostart.sh.j2
+
+- name: Qtile - Create Qtile desktop entry
   template:
-    src: "{{ item }}"
-    dest: "{{ qtile_config_directory }}/autostart.sh"
-    mode: '0755'
-  loop:
-    - wallpaper.sh.j2
-    - autostart.sh.j2
+    src: qtile.desktop.j2
+    dest: /home/alialsada/.local/share/applications/qtile.desktop
+    mode: '0644'
 
 - name: Qtile - Copy qtile configuration file
   template:
