@@ -47,7 +47,7 @@
 - name: Qtile - Copy qtile scripts
   template:
     src: "{{ item }}.j2"
-    dest: "{{ qtile_config_directory }}/autostart.sh"
+    dest: "{{ qtile_config_directory }}/{{ item }}"
     mode: '0755'
   loop:
     - wallpaper.sh
