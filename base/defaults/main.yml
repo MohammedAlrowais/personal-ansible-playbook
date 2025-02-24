@@ -15,9 +15,12 @@ essential_packages:
   - rofi # apps manager
   - ncdu # Disk space
   - Polybar
-  - imagemagick #--------------
+  - imagemagick
   - ibnotify-bin
   - blueman
+  - virt-manager
+  - vagrant-libvirt
+  - libvirt-clients
   # - qbittorrent
   # - firefox-esr
   # - aptitude
@@ -65,10 +68,6 @@ essential_packages:
   # - libreoffice
   # - libx265-dev
   # - qemu-system
-  # - libvirt-clients
-  # - libvirt-daemon-system
-  # - virt-manager
-  # - vagrant-libvirt
   # - ansible-lint
   # - inkscape
   # - audacity

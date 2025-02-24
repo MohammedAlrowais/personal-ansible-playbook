@@ -5,6 +5,5 @@
   gather_facts: true
   roles:
     # - docker
-    - qtile
-    # - libvirt
-    # - vagrant
+    # - qtile
+    - libvirt

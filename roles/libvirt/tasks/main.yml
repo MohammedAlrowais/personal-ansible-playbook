@@ -1,0 +1,29 @@
+---
+- name: Libvirt - Update package lists
+  apt:
+    update_cache: yes
+
+- name: Libvirt - Install required packages
+  apt:
+    name:
+      - vagrant
+      - qemu-kvm
+      - libvirt-daemon-system
+      - ebtables
+      - libguestfs-tools
+      - vagrant
+      - ruby-fog-libvirt
+    state: present
+
+- name: Libvirt - Add default user to virt-manager group
+  user:
+    name: "alialsada"
+    state: present
+    groups:
+      - libvirt
+      - sudo
+    append: yes
+
+- name: Libvirt - Install vagrant-libvirt plugin
+  command: vagrant plugin install vagrant-libvirt
+  changed_when: false
