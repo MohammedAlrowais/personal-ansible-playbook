@@ -4,6 +4,7 @@
   become: true
   gather_facts: true
   roles:
-    # - docker
-    # - qtile
+    - base
+    - docker
+    - qtile
     - libvirt

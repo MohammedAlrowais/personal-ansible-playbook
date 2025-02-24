@@ -10,7 +10,8 @@
 # ----------------------------------------------------- 
 
 # Cache file for holding the current wallpaper
-wallpaper_folder="$HOME/wallpaper"
+wallpaper_folder="$HOME/wallpapers"
+echo "Wallpaper folder: $wallpaper_folder"
 if [ -f ~/.config/ml4w/settings/wallpaper-folder.sh ] ;then
     source ~/.config/ml4w/settings/wallpaper-folder.sh
 fi
@@ -73,7 +74,7 @@ qtile cmd-obj -o cmd -f reload_config
 # ----------------------------------------------------- 
 source "$HOME/.cache/wal/colors.sh"
 echo "Wallpaper: $wallpaper"
-newwall=$(echo $wallpaper | sed "s|$HOME/wallpaper/||g")
+newwall=$(echo $wallpaper | sed "s|$HOME/wallpapers/||g")
 
 # ----------------------------------------------------- 
 # Created blurred wallpaper

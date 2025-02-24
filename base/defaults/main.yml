@@ -6,7 +6,9 @@ essential_packages_pipx:
   - pywal
 
 essential_packages:
-  - xfce4-settings-manager
+  - git
+  - btop
+  - vlc
   - thunar
   - xclip 
   - network-manager
@@ -17,17 +19,13 @@ essential_packages:
   - dmenu
   - rofi # apps manager
   - ncdu # Disk space
-  - Polybar
   - imagemagick
-  - ibnotify-bin
   - blueman
+  - arandr
   - virt-manager
-  - vagrant-libvirt
-  - libvirt-clients
   # - qbittorrent
   # - firefox-esr
   # - aptitude
-  # - arandr
   # - build-essential
   # - compton
   # - exa
@@ -37,7 +35,6 @@ essential_packages:
   # - ibus-table-emoji
   # - geany
   # - gimp
-  # - git
   # - htop
   # - kdenlive
   # - keepass2
@@ -46,20 +43,17 @@ essential_packages:
   # - libxrandr-dev
   # - lightdm
   # - maven
-  # - mediainfo
+  # - mediainfoc
   # - menu
   # - mercurial
   # - net-tools
-  # - nitrogen
   # - node-less
   # - obs-studio
-  # - rofi
   # - rsync
   # - ruby-sass
   # - simplescreenrecorder
   # - snapd
   # - suckless-tools
-  # - sudo
   # - surf
   # - screenkey
   # - tortoisehg

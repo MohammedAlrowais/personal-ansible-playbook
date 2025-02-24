@@ -11,7 +11,6 @@
       - libvirt-daemon-system
       - ebtables
       - libguestfs-tools
-      - vagrant
       - ruby-fog-libvirt
     state: present
 

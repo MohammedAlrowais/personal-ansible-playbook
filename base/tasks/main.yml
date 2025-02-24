@@ -1,0 +1,14 @@
+---
+- name: Base - Install apt packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ essential_packages }}"
+
+- name: Base - Copy wallpapers
+  copy:
+    src: wallpapers/
+    dest: /home/alialsada/wallpapers/
+    owner: alialsada
+    group: alialsada
+    mode: "0644"
