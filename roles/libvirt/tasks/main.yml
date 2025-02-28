@@ -16,11 +16,10 @@
 
 - name: Libvirt - Add default user to virt-manager group
   user:
-    name: "alialsada"
+    name: alialsada
     state: present
     groups:
       - libvirt
-      - sudo
     append: yes
 
 - name: Libvirt - Install vagrant-libvirt plugin
