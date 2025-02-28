@@ -20,11 +20,13 @@
 
 - name: Qtile - Install qtile its dependencies
   community.general.pipx:
-    name: qtile
+    name: "{{ qtile }}"
     state: present
   loop:
     - qtile
     - qtile-extras
+    - psutil
+    - dbus-next
     - dbus-fast
 
 - name: Qtile - add qtile to path
@@ -32,11 +34,11 @@
     cmd: pipx ensurepath
   changed_when: false
 
-- name: Install required Python packages for Qtile
-  ansible.builtin.command:
-    cmd: pipx runpip qtile install qtile_extras psutil dbus-next
-  register: qtile_install_results
-  changed_when: False
+# - name: Install required Python packages for Qtile
+#   ansible.builtin.command:
+#     cmd: pipx runpip qtile install qtile_extras psutil dbus-next
+#   register: qtile_install_results
+#   changed_when: False
 
 - name: Qtile - Ensure configuration directory exists
   file:

@@ -23,6 +23,7 @@ essential_packages:
   - blueman
   - arandr
   - virt-manager
+  - bluez
   
 # Compton
 compton_opacity_apps:
