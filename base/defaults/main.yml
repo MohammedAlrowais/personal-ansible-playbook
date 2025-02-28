@@ -24,6 +24,7 @@ essential_packages:
   - arandr
   - virt-manager
   - bluez
+  - compton
   
 # Compton
 compton_opacity_apps:
