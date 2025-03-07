@@ -12,12 +12,6 @@
     - python3-xcffib
     - python3-cairocffi
 
-- name: Qtile - Ensure pipx is installed
-  apt:
-    name: pipx
-    state: present
-    update_cache: true
-
 - name: Qtile - Install qtile
   community.general.pipx:
     name: "{{ item }}"

@@ -1,9 +1,19 @@
 ---
+- name: Base - Update apt cache
+  apt:
+    update_cache: yes
+
 - name: Base - Install apt packages
   apt:
     name: "{{ item }}"
     state: present
   loop: "{{ essential_packages }}"
+
+- name: Base - Install pipx packages
+  community.general.pipx:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ essential_packages_pipx }}"
 
 - name: Base - Copy wallpapers
   copy:

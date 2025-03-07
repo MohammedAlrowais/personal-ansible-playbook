@@ -2,9 +2,6 @@
 user: alialsada
 group: alialsada
 
-essential_packages_pipx:
-  - pywal
-
 essential_packages:
   - git
   - btop
@@ -27,3 +24,7 @@ essential_packages:
   - compton
   - ddcutil
   - virtualbox
+  - pipx
+
+essential_packages_pipx:
+  - pywal
