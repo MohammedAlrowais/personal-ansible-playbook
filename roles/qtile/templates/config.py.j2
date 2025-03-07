@@ -2,13 +2,11 @@ import os
 import json
 import subprocess
 from pathlib import Path
-from libqtile import qtile
 from libqtile.lazy import lazy
 from libqtile.widget.image import Image
 from libqtile.widget import Spacer, Backlight, Volume
-from libqtile import hook, layout, bar, widget
-from libqtile.config import Key, Group, Screen
-
+from libqtile import qtile, hook, layout, bar, widget, extension
+from libqtile.config import Key, Group, Screen, Click, Drag, KeyChord, Match
 from qtile_extras import widget
 from qtile_extras.widget.decorations import RectDecoration
 from qtile_extras.widget.decorations import PowerLineDecoration
@@ -163,94 +161,111 @@ decor_right = {
     ],
 }
 
+colors = [
+    "#282c34",  # Background
+    "#abb2bf",  # Foreground
+    "#98c379",  # Green
+    "#e06c75",  # Red
+    "#61afef",  # Blue
+    "#c678dd",  # Purple
+    "#e5c07b",  # Yellow
+    "#56b6c2",  # Cyan
+    "#be5046",  # Orange
+    "#5c6370",  # Gray
+]
+
 # --------------------------------------------------------
 # Widgets
 # --------------------------------------------------------
-
 widget_list = [
-    widget.CurrentLayout(
-        **decor_left, 
-        background=Color1+".4",
-        foreground='ffffff',
-        desc='',
-        padding=10,
-        
+    widget.Spacer(length = 12),
+    widget.Prompt(
+                font = "Ubuntu Mono",
+                fontsize=14,
+                foreground = colors[1]
     ),
     widget.GroupBox(
-        **decor_left,
-        background="#ffffff.7",
-        highlight_method='block',
-        highlight='ffffff',
-        block_border='ffffff',
-        highlight_color=['ffffff','ffffff'],
-        block_highlight_text_color='000000',
-        foreground='ffffff',
-        rounded=False,
-        this_current_screen_border='ffffff',
-        active='ffffff'
-    ),
-    widget.WindowName(
-        **decor_left,
-        max_chars=50,
-        background=Color2+".4",
-        width=400,
-        padding=10,
-        format='{name}',
-    ),
-    widget.Spacer(),
-    widget.Spacer(
-        length=30
-    ),
+                fontsize = 12,
+                margin_y = 5,
+                margin_x = 8,
+                padding_y = 0,
+                padding_x = 1,
+                borderwidth = 3,
+                active = colors[8],
+                inactive = colors[9],
+                rounded = False,
+                highlight_color = colors[2],
+                highlight_method = "line",
+                this_current_screen_border = colors[7],
+                this_screen_border = colors [4],
+                other_current_screen_border = colors[7],
+                other_screen_border = colors[4],
+                ),
     widget.TextBox(
-        **decor_right,
-        background="#000000.3"      
-    ),    
+                text = '|',
+                font = "Ubuntu Mono",
+                foreground = colors[9],
+                padding = 2,
+                fontsize = 14
+                ),
+    widget.CurrentLayout(
+                foreground = colors[1],
+                padding = 5
+                ),
+    widget.TextBox(
+                text = '|',
+                font = "Ubuntu Mono",
+                foreground = colors[9],
+                padding = 2,
+                fontsize = 14
+                ),
+    widget.WindowName(
+                foreground = colors[6],
+                padding = 4,
+                max_chars = 40
+                ),
+    widget.CPU(
+                format = ' Cpu: {load_percent}%',
+                foreground = colors[4],
+                padding = 6, 
+                ),
     widget.Memory(
-        **decor_right,
-        background=Color10+".4",
-        padding=10,        
-        measure_mem='G',
-        format="{MemUsed:.0f}{mm} ({MemTotal:.0f}{mm})"
-    ),
-    widget.Volume(
-        **decor_right,
-        fmt='Vol: {}',
-        mute_format='Muted',
-        background=Color12+".4",
-        volume_up_command="pactl set-sink-volume @DEFAULT_SINK@ +5%",
-        volume_down_command="pactl set-sink-volume @DEFAULT_SINK@ -5%",
-        mute_command="pactl set-sink-mute @DEFAULT_SINK@ toggle",
-        get_volume_command="pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}'",
-        padding=10, 
-    
-    ),
+                foreground = colors[8],
+                padding = 6, 
+                mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
+                format = '{MemUsed: .0f}{mm}',
+                fmt = '🖥  Mem: {} used',
+                ),
     widget.DF(
-        **decor_right,
-        padding=10, 
-        background=Color8+".4",        
-        visible_on_warn=False,
-        format="{p} {uf}{m} ({r:.0f}%)"
-    ),
-    widget.Bluetooth(
-        **decor_right,
-        background=Color2+".4",
-        padding=10,
-        mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("blueman-manager")},
-    ),
-    #widget.Wlan(
-        #**decor_right,
-        #background=Color2+".4",
-        #padding=10,
-        #format='{essid} {percent:2.0%}',
-        #mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("alacritty -e nmtui")},
-    #),
+                update_interval = 60,
+                foreground = colors[5],
+                padding = 6, 
+                mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e df')},
+                partition = '/',
+                #format = '[{p}] {uf}{m} ({r:.0f}%)',
+                format = '{uf}{m} free',
+                fmt = '🖴  Disk: {}',
+                visible_on_warn = False,
+                ),
+    widget.Volume(
+                foreground = colors[7],
+                padding = 6, 
+                fmt = '🕫  Vol: {}',
+                ),
+    widget.KeyboardLayout(
+                foreground = colors[4],
+                padding = 6, 
+                fmt = '⌨  Kbd: {}',
+                ),
     widget.Clock(
-        **decor_right,
-        background=Color4+".4",   
-        padding=10,      
-        format="%Y-%m-%d / %I:%M %p",
-    ),
+                foreground = colors[8],
+                padding = 6, 
+                format = "⏱  %a, %b %d - %H:%M",
+                ),
+    widget.Systray(padding = 3),
+    widget.Spacer(length = 8),
 ]
+
 
 # Hide Modules if not on laptop
 #if (show_wlan == False):

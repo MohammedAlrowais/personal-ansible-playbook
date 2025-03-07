@@ -25,6 +25,7 @@ essential_packages:
   - virt-manager
   - bluez
   - compton
+  - ddcutil
   
 # Compton
 compton_opacity_apps:
