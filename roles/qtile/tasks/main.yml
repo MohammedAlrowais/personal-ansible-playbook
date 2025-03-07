@@ -30,7 +30,7 @@
     cmd: pipx ensurepath
   changed_when: false
 
-- name: Install required Python packages for Qtile
+- name: Qtile - Install required Python packages
   ansible.builtin.command:
     cmd: pipx runpip qtile install qtile_extras psutil dbus-next dbus-fast
   changed_when: False
