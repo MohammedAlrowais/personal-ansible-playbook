@@ -18,7 +18,7 @@
 - name: Base - Copy wallpapers
   copy:
     src: wallpapers/
-    dest: /home/alialsada/wallpapers/
-    owner: alialsada
-    group: alialsada
+    dest: "/home/{{ username }}/wallpapers/"
+    owner: "{{ username }}"
+    group: "{{ group }}"
     mode: "0644"

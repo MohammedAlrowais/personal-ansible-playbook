@@ -16,7 +16,7 @@
 
 - name: Libvirt - Add default user to virt-manager group
   user:
-    name: alialsada
+    name: "{{ username }}"
     state: present
     groups:
       - libvirt

@@ -1,1 +1,1 @@
-qtile_config_directory: /home/alialsada/.config/qtile
+qtile_config_directory: "/home/{{ username }}/.config/qtile"

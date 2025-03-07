@@ -296,4 +296,4 @@ screens = [
 # ----------------------------------------------
 @hook.subscribe.startup_once
 def autostart():
-    subprocess.run(["/usr/bin/bash", "/home/alialsada/.config/qtile/scripts/autostart.sh"])
+    subprocess.run(["/usr/bin/bash", "/home/{{ username }}/.config/qtile/scripts/autostart.sh"])
