@@ -3,6 +3,8 @@ user: alialsada
 group: alialsada
 
 essential_packages:
+  - curl
+  - wget
   - git
   - btop
   - vlc

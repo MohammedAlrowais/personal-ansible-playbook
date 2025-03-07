@@ -1,0 +1,8 @@
+---
+# Directories
+kitty_config_directory: home/alialsada/.config/kitty
+
+# Kitty configuration
+kitty_font_family: "SauceCodePro Nerd Font"
+kitty_font_size: 12.0
+kitty_background_opacity: 1.0
