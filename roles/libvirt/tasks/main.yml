@@ -22,6 +22,12 @@
       - libvirt
     append: yes
 
+- name: Libvirt - Check if vagrant-libvirt plugin is installed
+  command: vagrant plugin list
+  register: vagrant_plugins
+  changed_when: false
+  ignore_errors: true
+
 - name: Libvirt - Install vagrant-libvirt plugin
   command: vagrant plugin install vagrant-libvirt
-  changed_when: false
+  when: "'vagrant-libvirt' not in vagrant_plugins.stdout"
