@@ -1,6 +1,6 @@
 ---
 # Directories
-kitty_config_directory: home/alialsada/.config/kitty
+kitty_config_directory: "/home/{{ username }}/.config/kitty"
 
 # Kitty configuration
 kitty_font_family: "SauceCodePro Nerd Font"

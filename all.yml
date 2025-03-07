@@ -7,4 +7,5 @@
     - base
     - docker
     - qtile
+    - kitty
     - libvirt
