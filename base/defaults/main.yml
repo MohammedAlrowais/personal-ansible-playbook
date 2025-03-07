@@ -26,16 +26,4 @@ essential_packages:
   - bluez
   - compton
   - ddcutil
-  
-# Compton
-compton_opacity_apps:
-  - name: code
-    opacity: 95
-
-# Vscode Extentions
-## code --list-extensions
-vscode_extentions:
-  - EditorConfig.EditorConfig
-  - mhutchie.git-graph
-  - dbaeumer.vscode-eslint
-  - mhutchie.git-graph
+  - virtualbox
