@@ -130,7 +130,6 @@ layouts = [
     layout.MonadTall(**layout_theme),
     layout.MonadWide(**layout_theme),
     layout.RatioTile(**layout_theme),
-    layout.Tile(**layout_theme),
     layout.Max(**layout_theme),
     #layout.Bsp(**layout_theme),
     #layout.Floating(**layout_theme)
@@ -247,11 +246,13 @@ widget_list = [
                 ),
     widget.Volume(
                 foreground = colors[7],
-                padding = 6, 
+                padding = 6,
                 fmt = '🕫  Vol: {}',
                 volume_up_command="pactl set-sink-volume @DEFAULT_SINK@ +5%",
                 volume_down_command="pactl set-sink-volume @DEFAULT_SINK@ -5%",
-                mute_command="pactl set-sink-mute @DEFAULT_SINK@ toggle",
+                mute_command="pactl set-sink-mute @DEFAULT_SINK@ toggle"
+                check_mute_command="pactl get-sink-mute @DEFAULT_SINK@ | grep -o 'yes'",
+                check_mute_string="yes",,
                 get_volume_command="pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}'",
                 ),
     widget.KeyboardLayout(
