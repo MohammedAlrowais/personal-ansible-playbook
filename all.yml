@@ -8,4 +8,4 @@
     - docker
     - qtile
     - kitty
-    - libvirt
+    - vm
