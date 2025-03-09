@@ -230,7 +230,7 @@ widget_list = [
     widget.Memory(
                 foreground = colors[8],
                 padding = 6, 
-                mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
+                # mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
                 format = '{MemUsed: .0f}{mm}',
                 fmt = '🖥  Mem: {} used',
                 ),
@@ -238,7 +238,7 @@ widget_list = [
                 update_interval = 60,
                 foreground = colors[5],
                 padding = 6, 
-                mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e df')},
+                # mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e df')},
                 partition = '/',
                 format = '{uf}{m} free',
                 fmt = '🖴  Disk: {}',
