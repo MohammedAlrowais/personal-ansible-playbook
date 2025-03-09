@@ -1,1 +1,4 @@
-qtile_config_directory: /home/alialsada/.config/qtile
+---
+config_directory: /home/alialsada/.config
+qtile_config_directory: "{{ config_directory }}/qtile"
+picom_config_directory: "{{ config_directory }}/picom"

@@ -31,12 +31,13 @@
 
 - name: Qtile - Ensure configuration directory exists
   file:
-    path: "{{ qtile_config_directory }}"
+    path: "{{ item }}"
     state: directory
     mode: '0755'
   loop:
     - "{{ qtile_config_directory }}"
     - "{{ qtile_config_directory }}/scripts"
+    - "{{ picom_config_directory }}"
     
 - name: Qtile - Copy qtile scripts
   template:
@@ -57,4 +58,10 @@
   template:
     src: config.py.j2
     dest: "{{ qtile_config_directory }}/config.py"
+    mode: '0644'
+
+- name: Qtile - Copy pciom configuration file
+  template:
+    src: config.py.j2
+    dest: "{{ picom_config_directory }}/picom.conf"
     mode: '0644'

@@ -21,10 +21,10 @@ essential_packages:
   - arandr
   - virt-manager
   - bluez
-  - compton
   - ddcutil
   - virtualbox
   - pipx
+  - picom
 
 essential_packages_pipx:
   - pywal
