@@ -1,0 +1,38 @@
+---
+- name: VM - Update package lists
+  apt:
+    update_cache: yes
+
+- name: VM - Install vagrant required packages
+  apt:
+    name:
+      - vagrant
+      - qemu-kvm
+      - libvirt-daemon-system
+      - ebtables
+      - libguestfs-tools
+      - ruby-fog-libvirt
+    state: present
+
+- name: VM - Add default user to virt-manager group
+  user:
+    name: "{{ username }}"
+    state: present
+    groups:
+      - libvirt
+    append: yes
+
+- name: VM - Get list of installed plugins
+  command: vagrant plugin list
+  register: vagrant_installed_plugins
+  changed_when: false
+  ignore_errors: true
+
+- name: Extract installed plugin names
+  set_fact:
+    vagrant_installed_plugins_names: "{{ vagrant_installed_plugins.stdout_lines | map('split', ' ') | map('first') | list }}"
+
+- name: VM - Install vagrant plugins
+  command: "vagrant plugin install {{ item }}"
+  when: "'{{ item }}' not in vagrant_installed_plugins_names"
+  loop: "{{ vagrant_plugins }}"

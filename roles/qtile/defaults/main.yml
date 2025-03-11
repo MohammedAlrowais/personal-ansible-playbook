@@ -1,4 +1,4 @@
 ---
-config_directory: /home/alialsada/.config
+config_directory: /home/{{ username }}/.config
 qtile_config_directory: "{{ config_directory }}/qtile"
 picom_config_directory: "{{ config_directory }}/picom"

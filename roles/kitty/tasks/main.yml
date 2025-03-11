@@ -1,0 +1,15 @@
+---
+- name: Kitty - Create configuration directory
+  file:
+    path: "{{ kitty_config_directory }}"
+    state: directory
+    mode: "0755"
+
+- name: Kitty - Copy configuration files
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ kitty_config_directory }}/{{ item }}"
+    mode: "0644"
+  loop:
+    - kitty.conf
+    - colors.conf

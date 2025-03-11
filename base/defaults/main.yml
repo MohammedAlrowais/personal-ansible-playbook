@@ -1,6 +1,5 @@
 ---
-user: alialsada
-group: alialsada
+
 
 essential_packages_apt:
   - git
