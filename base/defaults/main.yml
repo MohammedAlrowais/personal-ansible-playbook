@@ -2,7 +2,7 @@
 user: alialsada
 group: alialsada
 
-essential_packages:
+essential_packages_apt:
   - git
   - btop
   - vlc

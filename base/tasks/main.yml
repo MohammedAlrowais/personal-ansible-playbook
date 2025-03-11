@@ -1,7 +1,7 @@
 ---
 - name: Base - Install apt packages
   apt:
-    name: "{{ essential_packages }}"
+    name: "{{ essential_packages_apt }}"
     state: present
     update_cache: yes
 
