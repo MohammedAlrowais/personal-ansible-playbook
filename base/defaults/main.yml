@@ -25,6 +25,7 @@ essential_packages:
   - virtualbox
   - pipx
   - picom
+  - deborphan
 
 essential_packages_pipx:
   - pywal
