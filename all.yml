@@ -6,6 +6,27 @@
   roles:
     - base
     - docker
+
+- name: Qtile
+  hosts: all
+  become: true
+  gather_facts: true
+  roles:
     - qtile
+  tags: qtile
+
+- name: kitty
+  hosts: all
+  become: true
+  gather_facts: true
+  roles:
     - kitty
-    - vm
+  tags: kitty
+
+- name: virtual-machines
+  hosts: all
+  become: true
+  gather_facts: true
+  roles:
+    - virtual-machines
+  tags: virtual-machines

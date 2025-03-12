@@ -1,16 +1,15 @@
 ---
 - name: Qtile - Install necessary packages
   apt:
-    name: "{{ item }}"
+    name:
+      - xserver-xorg
+      - xinit
+      - libpangocairo-1.0-0
+      - python3-pip
+      - python3-xcffib
+      - python3-cairocffi
     state: present
     update_cache: true
-  loop:
-    - xserver-xorg
-    - xinit
-    - libpangocairo-1.0-0
-    - python3-pip
-    - python3-xcffib
-    - python3-cairocffi
 
 - name: Qtile - Install qtile
   community.general.pipx:
@@ -54,11 +53,16 @@
     dest: /usr/share/xsessions/qtile.desktop
     mode: '0644'
 
-- name: Qtile - Copy qtile configuration file
+- name: Qtile - Copy qtile configuration files
   template:
-    src: config.py.j2
-    dest: "{{ qtile_config_directory }}/config.py"
+    src: "{{ item }}.j2"
+    dest: "{{ qtile_config_directory }}/{{ item }}"
+    owner: "{{ username }}"
+    group: "{{ group }}"
     mode: '0644'
+  loop:
+    - colors.py
+    - config.py
 
 - name: Qtile - Copy pciom configuration file
   template:
