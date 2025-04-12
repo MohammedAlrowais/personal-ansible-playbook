@@ -1,10 +1,9 @@
 ---
-
-
 essential_packages_apt:
   - git
   - btop
   - vlc
+  - feh
   - thunar
   - xclip 
   - network-manager
