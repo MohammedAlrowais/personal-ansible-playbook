@@ -3,6 +3,12 @@
   apt:
     update_cache: yes
 
+- name: VM - Add HashiCorp repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+    filename: hashicorp  # Creates: /etc/apt/sources.list.d/hashicorp.list
+    state: present 
+
 - name: VM - Install vagrant required packages
   apt:
     name:
@@ -34,5 +40,5 @@
 
 - name: VM - Install vagrant plugins
   command: "vagrant plugin install {{ item }}"
-  when: "'{{ item }}' not in vagrant_installed_plugins_names"
+  when: item not in vagrant_installed_plugins_names
   loop: "{{ vagrant_plugins }}"
