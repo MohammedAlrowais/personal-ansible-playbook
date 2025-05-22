@@ -28,3 +28,7 @@ essential_packages_apt:
 
 essential_packages_pipx:
   - pywal
+
+fonts:
+  - name: nerd-fonts
+    url: https://github.com/ryanoasis/nerd-fonts/releases
