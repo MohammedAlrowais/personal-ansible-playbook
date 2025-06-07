@@ -23,7 +23,7 @@ essential_packages_apt:
   - virtualbox
   - pipx
   - picom
-  - deborphan
+  # - deborphan
   - redshift
 
 essential_packages_pipx:
