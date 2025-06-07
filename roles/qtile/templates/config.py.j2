@@ -15,6 +15,10 @@ show_bluetooth = False
 
 mod = "mod4"  # Super key
 keys = [
+
+    Key([mod], "a", lazy.next_screen()),
+    Key([mod], "s", lazy.prev_screen()),
+
     Key([mod], "space", lazy.next_layout()),  # Cycle through layouts
     Key([mod], "q", lazy.window.kill()),
     Key([mod], "j", lazy.layout.down()),
