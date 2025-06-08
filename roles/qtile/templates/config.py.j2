@@ -51,6 +51,7 @@ keys = [
     Key([mod, "shift"], "c", lazy.spawn("copyq")),
     Key([mod], "f", lazy.spawn("thunar")),
     Key([mod], "r", lazy.spawn("rofi -show drun")),
+    Key([mod], "d", lazy.spawn("arandr")),
     Key([mod, "shift"], "w", lazy.spawn(home + "/.config/qtile/scripts/wallpaper.sh"), desc="Update Theme and Wallpaper"),
     Key([mod, "control"], "w", lazy.spawn(home + "/.config/qtile/scripts/wallpaper.sh select"), desc="Select Theme and Wallpaper"),
 
