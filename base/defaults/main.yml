@@ -25,6 +25,7 @@ essential_packages_apt:
   - picom
   # - deborphan
   - redshift
+  - flameshot 
 
 essential_packages_pipx:
   - pywal

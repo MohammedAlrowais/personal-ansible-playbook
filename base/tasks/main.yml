@@ -5,11 +5,28 @@
     state: present
     update_cache: yes
 
+- name: Base - Ensure pipx PATH is configured
+  command:
+    cmd: pipx ensurepath
+  become: true
+  become_user: "{{ username }}"
+  changed_when: false
+
 - name: Base - Install pipx packages
   community.general.pipx:
     name: "{{ item }}"
     state: present
+  become: true
+  become_user: "{{ username }}"
   loop: "{{ essential_packages_pipx }}"
+
+- name: Base - Ensure wallpapers directory exists
+  file:
+    path: "/home/{{ username }}/wallpapers"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ group }}"
+    mode: "0755"
 
 - name: Base - Copy wallpapers
   copy:
@@ -18,3 +35,11 @@
     owner: "{{ username }}"
     group: "{{ group }}"
     mode: "0644"
+
+- name: Base - Ensure screenshots directory exists
+  file:
+    path: "/home/{{ username }}/Pictures/Screenshots"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ group }}"
+    mode: "0755"

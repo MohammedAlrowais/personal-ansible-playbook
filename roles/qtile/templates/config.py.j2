@@ -68,6 +68,11 @@ keys = [
     Key([mod, "shift"], "h", lazy.layout.shuffle_right(), desc="Move window right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+
+    # Screenshot
+    Key([], "Print", lazy.spawn("flameshot gui")),
+    Key([mod], "x", lazy.spawn("flameshot gui")),
+    Key([mod, "shift"], "s", lazy.spawn(f"flameshot full -p {home}/Pictures/Screenshots")),
 ]
 
 # ----------------------------------------------
@@ -276,4 +281,4 @@ screens = [
 # ----------------------------------------------
 @hook.subscribe.startup_once
 def autostart():
-    subprocess.run(["/usr/bin/bash", "/home/{{ username }}/.config/qtile/scripts/autostart.sh"])
+    subprocess.run(["/usr/bin/bash", f"{home}/.config/qtile/scripts/autostart.sh"])

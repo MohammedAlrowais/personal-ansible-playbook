@@ -8,40 +8,59 @@
       - python3-pip
       - python3-xcffib
       - python3-cairocffi
+      - python3-dev
+      - build-essential
+      - libxkbcommon-dev
+      - libxkbcommon-x11-dev
+      - pkg-config
+      - libffi-dev
     state: present
     update_cache: true
 
-- name: Qtile - Install qtile
+- name: Qtile - Install qtile via pipx
   community.general.pipx:
-    name: "{{ item }}"
+    name: qtile
     state: present
-  loop:
-    - qtile
+  become: true
+  become_user: "{{ username }}"
 
-- name: Qtile - add qtile to path
+- name: Qtile - Add qtile to path
   command:
     cmd: pipx ensurepath
+  become: true
+  become_user: "{{ username }}"
   changed_when: false
 
-- name: Qtile - Install required Python packages
-  ansible.builtin.command:
-    cmd: pipx runpip qtile install qtile_extras psutil dbus-next dbus-fast
-  changed_when: False
+- name: Qtile - Inject required Python packages into qtile environment
+  community.general.pipx:
+    name: qtile
+    state: inject
+    inject_packages:
+      - psutil
+      - qtile_extras
+      - dbus-next
+      - dbus-fast
+  become: true
+  become_user: "{{ username }}"
 
-- name: Qtile - Ensure configuration directory exists
+- name: Qtile - Ensure configuration directories exist
   file:
     path: "{{ item }}"
     state: directory
+    owner: "{{ username }}"
+    group: "{{ group }}"
     mode: '0755'
   loop:
     - "{{ qtile_config_directory }}"
     - "{{ qtile_config_directory }}/scripts"
     - "{{ picom_config_directory }}"
-    
+
 - name: Qtile - Copy qtile scripts
   template:
     src: "{{ item }}.j2"
     dest: "{{ qtile_config_directory }}/scripts/{{ item }}"
+    owner: "{{ username }}"
+    group: "{{ group }}"
     mode: '0755'
   loop:
     - wallpaper.sh
@@ -64,8 +83,29 @@
     - colors.py
     - config.py
 
-- name: Qtile - Copy pciom configuration file
+- name: Qtile - Copy picom configuration file
   template:
-    src: config.py.j2
+    src: picom.conf.j2
     dest: "{{ picom_config_directory }}/picom.conf"
+    owner: "{{ username }}"
+    group: "{{ group }}"
     mode: '0644'
+
+- name: Qtile - Ensure pipx bin directory is in PATH
+  lineinfile:
+    path: "/home/{{ username }}/.bashrc"
+    line: 'export PATH="$PATH:/home/{{ username }}/.local/bin"'
+    state: present
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ group }}"
+
+- name: Qtile - Ensure pipx bin directory is in PATH for zsh users
+  lineinfile:
+    path: "/home/{{ username }}/.zshrc"
+    line: 'export PATH="$PATH:/home/{{ username }}/.local/bin"'
+    state: present
+    create: yes
+    owner: "{{ username }}"
+    group: "{{ group }}"
+  ignore_errors: yes

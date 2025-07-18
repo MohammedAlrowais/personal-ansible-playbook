@@ -1,28 +1,64 @@
 #!/bin/bash
 # Wallpaper switcher with Rofi selection + random option
 
-wallpaper_folder="$HOME/wallpapers"
+wallpaper_folder="/home/{{ username }}/wallpapers"
+
+# Check dependencies
+if ! command -v feh >/dev/null 2>&1; then
+    echo "Error: feh is not installed"
+    exit 1
+fi
+
+if ! command -v rofi >/dev/null 2>&1; then
+    echo "Error: rofi is not installed"
+    exit 1
+fi
+
+# Check if wallpaper folder exists
+if [ ! -d "$wallpaper_folder" ]; then
+    echo "Error: Wallpaper folder $wallpaper_folder does not exist"
+    exit 1
+fi
+
+# Check if any wallpapers exist
+wallpaper_count=$(find "$wallpaper_folder" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | wc -l)
+if [ "$wallpaper_count" -eq 0 ]; then
+    echo "Error: No wallpapers found in $wallpaper_folder"
+    exit 1
+fi
 
 case "$1" in
     "select")
         # Rofi selection mode
-        selected=$(find "$wallpaper_folder" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec basename {} \; | sort | while read rfile
-        do
+        selected=$(find "$wallpaper_folder" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec basename {} \; | sort | while read rfile; do
             echo -en "$rfile\x00icon\x1f$wallpaper_folder/${rfile}\n"
-        done | rofi -dmenu -replace -l 6 -config ~/.config/rofi/config-wallpaper.rasi)
-
-        [ -z "$selected" ] && exit
-        feh --bg-scale "$wallpaper_folder/$selected"
-        ;;
-    
-    "")
-        # Random wallpaper mode
-        random_wallpaper=$(find "$wallpaper_folder" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | shuf -n 1)
-        feh --bg-scale "$random_wallpaper"
-        ;;
+        done | rofi -dmenu -replace -l 6 -config /home/{{ username }}/.config/rofi/config-wallpaper.rasi)
         
+        [ -z "$selected" ] && exit 0
+        
+        if feh --bg-scale "$wallpaper_folder/$selected"; then
+            echo "Wallpaper set to: $selected"
+        else
+            echo "Error: Failed to set wallpaper"
+            exit 1
+        fi
+        ;;
+    "init"|"random"|"")
+        # Random wallpaper mode (handles init, random, and no parameter)
+        random_wallpaper=$(find "$wallpaper_folder" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | shuf -n 1)
+        
+        if [ -n "$random_wallpaper" ] && feh --bg-scale "$random_wallpaper"; then
+            echo "Random wallpaper set to: $(basename "$random_wallpaper")"
+        else
+            echo "Error: Failed to set random wallpaper"
+            exit 1
+        fi
+        ;;
     *)
-        echo "Usage: $0 [select|random]"
+        echo "Usage: $0 [select|init|random]"
+        echo "  select: Choose wallpaper with rofi"
+        echo "  init:   Set random wallpaper (for startup)"
+        echo "  random: Set random wallpaper"
         exit 1
         ;;
 esac
