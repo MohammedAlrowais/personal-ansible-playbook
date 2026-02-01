@@ -7,6 +7,17 @@
 ~/.config/qtile/scripts/wallpaper.sh init
 
 # ----------------------------------------------
+# Audio Configuration - Set GA106 as default
+# ----------------------------------------------
+sleep 1  # Wait for PipeWire to be ready
+
+# Find and set GA106 as default sink
+DEFAULT_SINK=$(pactl list sinks short | grep -i "GA106\|nvidia" | head -1 | awk '{print $2}')
+if [ -n "$DEFAULT_SINK" ]; then
+    pactl set-default-sink "$DEFAULT_SINK"
+fi
+
+# ----------------------------------------------
 # Screenshot tool
 # ----------------------------------------------
 flameshot &
