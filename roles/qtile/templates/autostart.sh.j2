@@ -44,3 +44,11 @@ xset s off          # Disable screen saver
 xset -dpms          # Disable DPMS (Energy Star) power management
 xset s noblank      # Don't blank the screen
 
+# ----------------------------------------------
+# Fallback: if keyboard firmware has swapped Win/Alt,
+# swap them back at the X11 layer so mod4 (Super) works.
+# ----------------------------------------------
+if [ "$(xmodmap -pke | awk '/^keycode 133 = / {print $4}')" = "Alt_L" ]; then
+    setxkbmap -option altwin:swap_lalt_lwin
+fi
+
