@@ -91,6 +91,16 @@
     group: "{{ group }}"
     mode: '0644'
 
+- name: Qtile - Disable suspend and hibernate on idle
+  systemd:
+    name: "{{ item }}"
+    masked: true
+  loop:
+    - sleep.target
+    - suspend.target
+    - hibernate.target
+    - hybrid-sleep.target
+
 - name: Qtile - Ensure pipx bin directory is in PATH
   lineinfile:
     path: "/home/{{ username }}/.bashrc"
