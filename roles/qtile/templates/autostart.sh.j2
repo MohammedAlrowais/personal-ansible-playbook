@@ -45,10 +45,24 @@ xset -dpms          # Disable DPMS (Energy Star) power management
 xset s noblank      # Don't blank the screen
 
 # ----------------------------------------------
+# Keyboard layouts (US + Arabic, Alt+Shift toggles)
+# Configure GNOME input-sources so gsd-keyboard won't
+# reset xkb state, then apply directly via setxkbmap.
 # Fallback: if keyboard firmware has swapped Win/Alt,
 # swap them back at the X11 layer so mod4 (Super) works.
 # ----------------------------------------------
 if [ "$(xmodmap -pke | awk '/^keycode 133 = / {print $4}')" = "Alt_L" ]; then
-    setxkbmap -option altwin:swap_lalt_lwin
+    XKB_OPTIONS="altwin:swap_lalt_lwin,grp:alt_shift_toggle"
+    GSD_OPTIONS="['altwin:swap_lalt_lwin', 'grp:alt_shift_toggle']"
+else
+    XKB_OPTIONS="grp:alt_shift_toggle"
+    GSD_OPTIONS="['grp:alt_shift_toggle']"
 fi
+
+if command -v gsettings >/dev/null 2>&1; then
+    gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'ara')]"
+    gsettings set org.gnome.desktop.input-sources xkb-options "$GSD_OPTIONS"
+fi
+
+setxkbmap -layout us,ara -option "" -option "$XKB_OPTIONS"
 

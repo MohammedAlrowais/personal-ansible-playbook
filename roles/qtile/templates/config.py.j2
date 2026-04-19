@@ -244,8 +244,9 @@ widget_list = [
                 get_volume_command="pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}'",
                 ),
     widget.KeyboardLayout(
+                configured_keyboards = ['us', 'ara'],
                 foreground = colors[4],
-                padding = 6, 
+                padding = 6,
                 fmt = '⌨  Kbd: {}',
                 ),
     widget.Clock(
